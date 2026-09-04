@@ -1,0 +1,34 @@
+// ── Design tokens ─────────────────────────────────────────────
+// Dark-first, muted-blue accent, minimal chrome, 2px radii.
+
+:root {
+  // dark (default)
+  --bg: #0d1117;
+  --bg-soft: #161b22;
+  --surface: #1c2128;
+  --surface-2: #212830;
+  --border: #30363d;
+  --border-soft: #262c33;
+  --text: #e6edf3;
+  --text-muted: #8b949e;
+  --accent: #8ab4d8;
+  --accent-soft: rgba(138, 180, 216, 0.12);
+  --accent-border: rgba(138, 180, 216, 0.35);
+  --radius: 2px;
+  --radius-lg: 3px;
+  --maxw: 1080px;
+
+  &[data-theme='light'] {
+    --bg: #f6f8fa;
+    --bg-soft: #ffffff;
+    --surface: #ffffff;
+    --surface-2: #f2f4f6;
+    --border: #d0d7de;
+    --border-soft: #e4e8ec;
+    --text: #1f2328;
+    --text-muted: #59626e;
+    --accent: #0b6bcb;
+    --accent-soft: rgba(11, 107, 203, 0.08);
+    --accent-border: rgba(11, 107, 203, 0.3);
+  }
+}
