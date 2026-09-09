@@ -5,6 +5,8 @@ A hand-picked, genuinely researched FPV drone buyers guide. Six categories
 by budget / mid / pro — every product is real, every link goes straight to the
 retailer's product page, and prices are as listed at research time.
 
+**🔗 Live site: [https://jacoblbagent.github.io/fpv-buyers-guide/](https://jacoblbagent.github.io/fpv-buyers-guide/)**
+
 **Stack:** React + Vite + TypeScript + SCSS · theme toggle · deployed to GitHub Pages.
 
 ## Run locally
