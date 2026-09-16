@@ -443,6 +443,26 @@
   }
 }
 
+// Right-hand filter stack: budget band on top, airframe type underneath.
+.filters {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 7px;
+}
+
+// Type chips read as a secondary filter under the budget row.
+.tiers--class {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+
+  button {
+    padding: 3px 11px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+}
+
 // ── Grid + cards ──────────────────────────────────────────────
 .grid {
   display: grid;
@@ -501,6 +521,13 @@
     padding: 14px 16px 16px;
   }
 
+  &__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
   &__brand {
     margin: 0;
     font-size: 11px;
@@ -508,6 +535,19 @@
     text-transform: uppercase;
     letter-spacing: 0.07em;
     color: var(--text-muted);
+  }
+
+  &__class {
+    flex: none;
+    padding: 2px 6px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text-muted);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
   }
 
   &__name {

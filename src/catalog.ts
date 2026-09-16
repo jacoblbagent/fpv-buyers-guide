@@ -4,7 +4,12 @@ export const CATEGORIES: Category[] = [
   {
     id: 'drones',
     label: 'Ready-Built Drones',
-    blurb: 'BNF quads that fly out of the box — pair with a radio and go.',
+    blurb: 'Bind-N-Fly quads — the aircraft only. Add a radio and goggles (below) and you fly.',
+  },
+  {
+    id: 'bundles',
+    label: 'Bundles & Kits',
+    blurb: 'One box, everything in it — quad, goggles, radio, batteries. The fastest route to a first flight.',
   },
   {
     id: 'goggles',
