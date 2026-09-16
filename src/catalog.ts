@@ -31,4 +31,9 @@ export const CATEGORIES: Category[] = [
     label: 'Props & Spares',
     blurb: 'You will crash. Buy spares before you fly.',
   },
+  {
+    id: 'tools',
+    label: 'Tools',
+    blurb: 'Hex drivers, prop wrenches, smoke stoppers — the bench kit that keeps you flying.',
+  },
 ];

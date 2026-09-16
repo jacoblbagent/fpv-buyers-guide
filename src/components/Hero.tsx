@@ -11,7 +11,7 @@ export default function Hero() {
             The FPV <span className="hero__hl">Buyers Guide</span>
           </h1>
           <p className="hero__sub">
-            Six boxes to tick before you fly. Honest picks for budget, mid, and
+            Seven boxes to tick before you fly. Honest picks for budget, mid, and
             pro — every one a real product, linked and verified.
           </p>
           <div className="hero__cta">

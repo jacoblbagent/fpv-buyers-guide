@@ -1,7 +1,7 @@
 # FPV Buyers Guide
 
-A hand-picked, genuinely researched FPV drone buyers guide. Six categories
-(drones, goggles, radios, batteries, chargers, props & spares), each filtered
+A hand-picked, genuinely researched FPV drone buyers guide. Seven categories
+(drones, goggles, radios, batteries, chargers, props & spares, tools), each filtered
 by budget / mid / pro — every product is real, every link goes straight to the
 retailer's product page, and prices are as listed at research time.
 

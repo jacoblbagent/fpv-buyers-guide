@@ -6,7 +6,8 @@ export type CategoryId =
   | 'radios'
   | 'batteries'
   | 'chargers'
-  | 'props';
+  | 'props'
+  | 'tools';
 
 export interface Category {
   id: CategoryId;
