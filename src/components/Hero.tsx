@@ -18,9 +18,6 @@ export default function Hero() {
             <a className="btn btn--solid" href="#drones">
               Start Shopping
             </a>
-            <a className="btn" href="#goggles">
-              Skip to Goggles
-            </a>
           </div>
         </div>
         <div className="hero__art" aria-hidden>
