@@ -116,8 +116,6 @@
   &__art {
     display: grid;
     place-items: center;
-    --px: 0;
-    --py: 0;
 
     svg {
       width: min(420px, 100%);
@@ -127,9 +125,8 @@
 }
 
 // ── Hero quad animation ───────────────────────────────────────
-// Layers, back to front: (1) light pool, (2) parallax/bank, (3) slow drift,
-// (4) high-frequency vibration, then the craft itself. Each layer owns one
-// motion so they compose; all of it is transform/opacity only.
+// The craft floats on a slow vertical bob; the pool breathes in step with it.
+// Everything is transform/opacity only, and the props are always spinning.
 @property --amp {
   syntax: '<number>';
   initial-value: 1;
@@ -137,31 +134,19 @@
 }
 
 .quad {
-  --amp: 1; // drift amplitude (throttle)
-  --drift: 6s; // drift period
-  --par: 1; // parallax strength
+  --amp: 1; // float height
+  --float: 5.5s; // float period
 
   transition: --amp 0.5s ease;
 
   &__pool {
     fill: url(#quadPool);
-    animation: quad-pool var(--drift) ease-in-out infinite;
+    animation: quad-pool var(--float) ease-in-out infinite;
   }
 
-  &__par {
-    transform: translate3d(calc(var(--px) * var(--par) * 10px), calc(var(--py) * var(--par) * 8px), 0)
-      rotate(calc(var(--px) * -2.2deg));
-    transition: transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
-    will-change: transform;
-  }
-
-  &__drift {
-    animation: quad-drift var(--drift) ease-in-out infinite;
-    will-change: transform;
-  }
-
-  &__jit {
-    animation: quad-jit 0.62s ease-in-out infinite;
+  // the whole craft rises and settles, like a quad holding altitude
+  &__float {
+    animation: quad-float var(--float) ease-in-out infinite;
     will-change: transform;
   }
 }
@@ -277,20 +262,11 @@
   animation: prop-wash var(--wash, 1.6s) linear infinite;
 }
 
-.led {
-  animation: led-blink 1.1s linear infinite;
-
-  &__glow {
-    opacity: 0.14;
-  }
-}
-
-// Hover = throttle up: faster props, wider drift, brighter wash, stronger bank.
+// Hover = throttle up: faster props, a wider float, brighter wash.
 .hero__art:hover .quad,
 .hero__art:focus-within .quad {
-  --amp: 1.55;
-  --drift: 3.4s;
-  --par: 1.7;
+  --amp: 1.4;
+  --float: 4.2s;
 
   .rotor__blades {
     animation-duration: calc(var(--spin, 0.3s) / 3.2);
@@ -306,51 +282,19 @@
     animation-duration: calc(var(--wash, 1.6s) * 0.5);
   }
 
-  .led {
-    animation-duration: 0.5s;
-  }
-
-  .led__glow {
-    opacity: 0.3;
-  }
-
   .quad__pool {
-    animation-duration: calc(var(--drift) * 1.2);
+    animation-duration: calc(var(--float) * 1.2);
   }
 }
 
-@keyframes quad-drift {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
-  }
-  22% {
-    transform: translate3d(calc(8px * var(--amp)), calc(-11px * var(--amp)), 0)
-      rotate(calc(0.9deg * var(--amp))) scale(calc(1 + 0.006 * var(--amp)));
-  }
-  48% {
-    transform: translate3d(calc(-3px * var(--amp)), calc(-17px * var(--amp)), 0)
-      rotate(calc(-0.4deg * var(--amp))) scale(calc(1 + 0.012 * var(--amp)));
-  }
-  74% {
-    transform: translate3d(calc(-9px * var(--amp)), calc(-8px * var(--amp)), 0)
-      rotate(calc(-1.1deg * var(--amp))) scale(calc(1 + 0.004 * var(--amp)));
-  }
-}
-
-@keyframes quad-jit {
+// slow rise-and-settle; pure vertical, no rotation or lateral wander
+@keyframes quad-float {
   0%,
   100% {
     transform: translate3d(0, 0, 0);
   }
-  25% {
-    transform: translate3d(0.9px, -0.7px, 0);
-  }
   50% {
-    transform: translate3d(-0.7px, 0.6px, 0);
-  }
-  75% {
-    transform: translate3d(0.5px, 0.8px, 0);
+    transform: translate3d(0, calc(-16px * var(--amp)), 0);
   }
 }
 
@@ -396,21 +340,6 @@
   }
 }
 
-@keyframes led-blink {
-  0%,
-  45% {
-    opacity: 1;
-  }
-  46%,
-  92% {
-    opacity: 0.12;
-  }
-  93%,
-  100% {
-    opacity: 1;
-  }
-}
-
 // Respect the OS setting: keep the still frame, drop every loop.
 @media (prefers-reduced-motion: reduce) {
   .quad {
@@ -420,15 +349,12 @@
       transform: none;
     }
 
-    &__par,
-    &__drift,
-    &__jit {
+    &__float {
       animation: none;
       transform: none;
-      transition: none;
     }
 
-    // a bare two-blade prop looks broken when frozen — show the blur disc only
+    // frozen blades look broken — show the blur disc on its own
     .rotor__blades {
       animation: none;
       display: none;
@@ -439,9 +365,7 @@
       opacity: 0.9;
     }
 
-    .wash,
-    .led,
-    .led__glow {
+    .wash {
       animation: none;
     }
 

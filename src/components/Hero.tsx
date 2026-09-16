@@ -1,32 +1,6 @@
-import { useCallback, useRef } from 'react';
 import QuadSVG from './QuadSVG';
 
 export default function Hero() {
-  const artRef = useRef<HTMLDivElement>(null);
-  const rafRef = useRef(0);
-
-  // Cursor parallax: the quad banks toward the pointer. Values land on --px/--py
-  // (-1..1) and the CSS does the rest — coalesced to one write per frame.
-  const onMove = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
-    const el = artRef.current;
-    if (!el || rafRef.current) return;
-    const rect = el.getBoundingClientRect();
-    const px = Math.min(1, Math.max(-1, ((e.clientX - rect.left) / rect.width) * 2 - 1));
-    const py = Math.min(1, Math.max(-1, ((e.clientY - rect.top) / rect.height) * 2 - 1));
-    rafRef.current = requestAnimationFrame(() => {
-      rafRef.current = 0;
-      el.style.setProperty('--px', px.toFixed(3));
-      el.style.setProperty('--py', py.toFixed(3));
-    });
-  }, []);
-
-  const onLeave = useCallback(() => {
-    const el = artRef.current;
-    if (!el) return;
-    el.style.setProperty('--px', '0');
-    el.style.setProperty('--py', '0');
-  }, []);
-
   return (
     <section className="hero">
       <div className="hero__bg" aria-hidden />
@@ -49,13 +23,7 @@ export default function Hero() {
             </a>
           </div>
         </div>
-        <div
-          className="hero__art"
-          ref={artRef}
-          onPointerMove={onMove}
-          onPointerLeave={onLeave}
-          aria-hidden
-        >
+        <div className="hero__art" aria-hidden>
           <QuadSVG />
         </div>
       </div>
