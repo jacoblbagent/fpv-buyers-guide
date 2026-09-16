@@ -127,17 +127,8 @@
 // ── Hero quad animation ───────────────────────────────────────
 // The craft floats on a slow vertical bob; the pool breathes in step with it.
 // Everything is transform/opacity only, and the props are always spinning.
-@property --amp {
-  syntax: '<number>';
-  initial-value: 1;
-  inherits: true;
-}
-
 .quad {
-  --amp: 1; // float height
   --float: 5.5s; // float period
-
-  transition: --amp 0.5s ease;
 
   &__pool {
     fill: url(#quadPool);
@@ -262,31 +253,6 @@
   animation: prop-wash var(--wash, 1.6s) linear infinite;
 }
 
-// Hover = throttle up: faster props, a wider float, brighter wash.
-.hero__art:hover .quad,
-.hero__art:focus-within .quad {
-  --amp: 1.4;
-  --float: 4.2s;
-
-  .rotor__blades {
-    animation-duration: calc(var(--spin, 0.3s) / 3.2);
-  }
-
-  .rotor__disc {
-    // kill the shimmer so the brighter opacity below actually applies
-    animation: none;
-    opacity: 0.95;
-  }
-
-  .wash {
-    animation-duration: calc(var(--wash, 1.6s) * 0.5);
-  }
-
-  .quad__pool {
-    animation-duration: calc(var(--float) * 1.2);
-  }
-}
-
 // slow rise-and-settle; pure vertical, no rotation or lateral wander
 @keyframes quad-float {
   0%,
@@ -294,7 +260,7 @@
     transform: translate3d(0, 0, 0);
   }
   50% {
-    transform: translate3d(0, calc(-16px * var(--amp)), 0);
+    transform: translate3d(0, -16px, 0);
   }
 }
 
