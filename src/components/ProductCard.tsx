@@ -21,9 +21,6 @@ export default function ProductCard({ product }: Props) {
         ) : (
           <span className="card__placeholder">{product.brand}</span>
         )}
-        <span className={`card__tier card__tier--${product.tier}`}>
-          {product.tier}
-        </span>
       </div>
       <div className="card__body">
         <p className="card__brand">{product.brand}</p>

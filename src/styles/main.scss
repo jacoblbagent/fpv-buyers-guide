@@ -197,7 +197,11 @@
   gap: 6px;
 
   button {
-    padding: 6px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
+    padding: 5px 14px;
     border: 1px solid var(--border);
     border-radius: var(--radius);
     background: transparent;
@@ -214,6 +218,17 @@
       border-color: var(--accent-border);
       background: var(--accent-soft);
     }
+  }
+
+  &__label {
+    line-height: 1.2;
+  }
+
+  &__range {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    opacity: 0.9;
   }
 }
 
@@ -259,33 +274,6 @@
     font-weight: 700;
     font-size: 15px;
     letter-spacing: 0.04em;
-  }
-
-  &__tier {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    padding: 3px 8px;
-    border-radius: var(--radius);
-    background: color-mix(in srgb, var(--bg) 78%, transparent);
-    border: 1px solid var(--border);
-
-    &--budget {
-      color: #3fb950;
-      border-color: color-mix(in srgb, #3fb950 45%, transparent);
-    }
-    &--mid {
-      color: var(--accent);
-      border-color: var(--accent-border);
-    }
-    &--pro {
-      color: #d29922;
-      border-color: color-mix(in srgb, #d29922 45%, transparent);
-    }
   }
 
   &__body {

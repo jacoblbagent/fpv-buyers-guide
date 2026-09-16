@@ -2,10 +2,21 @@ import { useState } from 'react';
 import type { Category, FPVProduct, Tier } from '../types';
 import { TIERS } from '../types';
 import ProductCard from './ProductCard';
+import { formatPrice } from '../format';
 
 interface Props {
   category: Category;
   products: FPVProduct[];
+}
+
+function tierRange(products: FPVProduct[], t: Tier): string | null {
+  const prices = products
+    .filter((p) => p.tier === t && p.price != null)
+    .map((p) => p.price as number);
+  if (prices.length === 0) return null;
+  const min = Math.min(...prices);
+  const max = Math.max(...prices);
+  return min === max ? formatPrice(min) : `${formatPrice(min)}–${formatPrice(max)}`;
 }
 
 export default function CategorySection({ category, products }: Props) {
@@ -30,16 +41,23 @@ export default function CategorySection({ category, products }: Props) {
             >
               All
             </button>
-            {TIERS.map((t) => (
-              <button
-                key={t.id}
-                type="button"
-                className={tier === t.id ? 'is-active' : ''}
-                onClick={() => setTier(t.id)}
-              >
-                {t.label}
-              </button>
-            ))}
+            {TIERS.map((t) => {
+              const range = tierRange(products, t.id);
+              return (
+                <button
+                  key={t.id}
+                  type="button"
+                  className={tier === t.id ? 'is-active' : ''}
+                  onClick={() => setTier(t.id)}
+                  title={range ? `${t.label} range: ${range}` : t.label}
+                >
+                  <span className="tiers__label">{t.label}</span>
+                  {range ? (
+                    <span className="tiers__range">{range}</span>
+                  ) : null}
+                </button>
+              );
+            })}
           </div>
         </header>
 
