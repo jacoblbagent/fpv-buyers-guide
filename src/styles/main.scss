@@ -474,9 +474,16 @@
     overflow: hidden;
 
     img {
+      // The grid's `place-items: center` disables stretch, so `height: 100%` on a
+      // replaced element collapses to auto — the square photo then sized itself to
+      // its own 1:1 ratio, overflowed the box, and only its top edge stayed visible.
+      // Pin it to the box instead and let the image content centre itself inside.
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain; // every product shot is square: show the whole craft
+      object-position: center;
     }
   }
 
