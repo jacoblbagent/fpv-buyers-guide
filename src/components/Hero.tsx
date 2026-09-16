@@ -1,4 +1,4 @@
-import PropSVG from './PropSVG';
+import QuadSVG from './QuadSVG';
 
 export default function Hero() {
   return (
@@ -24,7 +24,7 @@ export default function Hero() {
           </div>
         </div>
         <div className="hero__art" aria-hidden>
-          <PropSVG />
+          <QuadSVG />
         </div>
       </div>
     </section>

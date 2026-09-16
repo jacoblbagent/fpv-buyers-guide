@@ -119,14 +119,18 @@
 
     svg {
       width: min(420px, 100%);
-      animation: spin 40s linear infinite;
+      animation: hover-bob 5.5s ease-in-out infinite;
     }
   }
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
+@keyframes hover-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-16px);
   }
 }
 
